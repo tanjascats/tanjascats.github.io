@@ -27,6 +27,9 @@ Original data | After fingerprinting
 The _extraction algorithm_ is an inverse process of embedding - it detects the fingerprint from the fingerprinted data set. This works because the same pseudo-random sequence generator is used to find the locations of modifications (note that only the owner with their secret key can reproduce this sequence) and the modification itself then reveals a fingerprint bit. 
 
 ## Robustness
-It is important to take into account malicious actions that may interefere with correct fingerprint detection. 
+It is important to take into account malicious actions that may interefere with correct fingerprint detection. For the fingerprint to be successfully extracted from data, there needs to be evidence of each fingerprint bit in the data. This can be compromised by removing or changing parts of data. If the fingerprint cannot be extracted from the data, it is not possible to identify the source of the unauthorised usage. 
+![](/assets/img/data-fingerprinting/table4.PNG)
+Therefore, each fingerprint bit is embedded with enough redundancy into the data such that, even if parts of it are removed or modified, the detection process still successfully extracts the fingerprint from the fingerprinted data.
+![](/assets/img/data-fingerprinting/table5.PNG)
 
 ## Fingerprinting a toy data set
