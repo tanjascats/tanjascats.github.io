@@ -20,9 +20,9 @@ Fingerprint is a bit string unique for each data recipient, that gets embedded i
 The positions of modifications are firstly chosen by a pseudo-random number sequence generator seeded by the owner's secret key. 
 Secondly, each fingerprint bit contributes to some of the modifications. 
 For instance, the fingerprint bit at the position 0 will cause the value 1 to change to 0 (red square).
-Original data | After fingerprinting
-:-------------------------:|:-------------------------:
-![](/assets/img/data-fingerprinting/table0.PNG)|![](/assets/img/data-fingerprinting/table1.PNG)
+| Original data | After fingerprinting |
+| :-------------------------|:------------------------- |
+| ![](/assets/img/data-fingerprinting/table0.PNG)|![](/assets/img/data-fingerprinting/table1.PNG) |
 
 The _extraction algorithm_ is an inverse process of embedding - it detects the fingerprint from the fingerprinted data set. This works because the same pseudo-random sequence generator is used to find the locations of modifications (note that only the owner with their secret key can reproduce this sequence) and the modification itself then reveals a fingerprint bit. 
 
