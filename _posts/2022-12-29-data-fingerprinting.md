@@ -35,4 +35,8 @@ Therefore, each fingerprint bit is embedded with enough redundancy into the data
 Intuitivelly, the more marks embedded in data, the more robust fingerprint will be. However, since more marks means modifying the original data more, this necessarily implies some utility loss. Therefore, a challenge for fingerprinting techniques is to **provide a robust ownership protection mechanism while keeping the original data utility as well as possible**.
 
 ## Fingerprinting a toy data set
-
+- show how fingerprinting functions look like 
+- show statistics of changes in the data, distributions
+- show detection 
+- show alteration example (subset/flipping) and successful detection 
+- show how much it is possible to change the data max, so that the fingerprint stays 
