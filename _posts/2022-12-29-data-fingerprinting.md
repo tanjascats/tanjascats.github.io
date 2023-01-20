@@ -50,7 +50,9 @@ A snippet of original data:
 |2|28|male|33\.0|3|no|southeast|4449\.462|
 |3|33|male|22\.705|0|no|northwest|21984\.47061|
 |4|32|male|28\.88|0|no|northwest|3866\.8552|
+
 A snippet of fingerprinted data:
+
 |index|age|sex|bmi|children|smoker|region|charges|
 |---|---|---|---|---|---|---|---|
 |0|19|female|27\.9|0|yes|southwest|16884\.925|
@@ -58,20 +60,22 @@ A snippet of fingerprinted data:
 |2|28|male|33\.0|3|no|southeast|4449\.462|
 |3|33|male|22\.704|0|no|northwest|21984\.47061|
 |4|32|male|28\.88|0|no|southeast|3866\.8552|
-Two differences are evident: (3, bmi) and (4, region).
+
+Three differences are evident: (1,charges), (3, bmi) and (4, region).
 Let's see the chnages overall:
 - show statistics of changes in the data, distributions
 Number of differences per attribute:
-||index|age|sex|bmi|children|smoker|region|charges|
+|-|index|age|sex|bmi|children|smoker|region|charges|
 |---|---|---|---|---|---|---|---|---|
 |absolute|-|28|23|38|31|24|53|25|
-|percentage|2\.09%|1\.72%|2\.84%|2\.32%|1\.79%|3\.98%|1\.87%|
+|percentage|-|2\.09%|1\.72%|2\.84%|2\.32%|1\.79%|3\.98%|1\.87%|
 
 How significant are the differences? Let's see the change in mean and standard deviation (we can do that only for numerical data)
 |original/fingerprinted|index|age|sex|bmi|children|smoker|region|charges|
-|---|---|---|---|---|---|---|---|---|---|
+|---|---|---|---|---|---|---|---|---|
 |mean|-|39.207025/39.202541|-|30.663397/30.663472|1.094918/1.098655|-|-|13270.422265/13270.422264|
-|std|-|14.049960/14.054018|-|6.098187/6.098295|1.205493/1.213542|-|-|12110.011237/12110.011237
+|std|-|14.049960/14.054018|-|6.098187/6.098295|1.205493/1.213542|-|-|12110.011237/12110.011237|
+
 For categorical data the changes are discreete so we can just have a look at the change of distributions:
 ![](/assets/img/data-fingerprinting/distributions.pdf)
 I.e. minimal changes
@@ -79,14 +83,16 @@ I.e. minimal changes
 - show detection 
 ~~~
 scheme.detection(fingerprinted_data, secret_key=12345678)
+
+Out: Recipient with id: 0 is suspected.
 ~~~
-Output: Recipient with id: 0 is suspected.
 
 For the correctness, let's check the output with a wrong secret key:
 ~~~
 scheme.detection(fingerprinted_data, secret_key=123)
+
+Out: No one suspected.
 ~~~
-Output: No one suspected.
 
 We can fingerprint more copies and see if there is possibility of a recipient confusion
 ~~~
@@ -99,8 +105,10 @@ suspects.append(scheme.detection(fingerprinted_data, secret_key=12345678))
 for fp_data in more_fingerprinted_data_copies:
   suspects.append(scheme.detection(fp_data, secret_key=12345678))
 suspects
+
+Out: \[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19\]
+
 ~~~
-output: \[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19\]
 
 - show alteration example (subset/flipping) and successful detection 
 Let's see what happens if the recipient alters their data. 
@@ -118,8 +126,9 @@ fp_data_modified.drop([1,5,89,120,145,167,567,600,675,723,765,876,901,902,903,91
 fp_data_modified['children'] = None
 
 scheme.detection(fp_data_modified, secret_key=12345678)
-~~~
+
 Out: Recipient 0 is suspected.
+~~~
 (maybe include the counts)
 
 - show how much it is possible to change the data max, so that the fingerprint stays 
