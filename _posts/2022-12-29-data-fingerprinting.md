@@ -36,7 +36,92 @@ Intuitivelly, the more marks embedded in data, the more robust fingerprint will 
 
 ## Fingerprinting a toy data set
 - show how fingerprinting functions look like 
+~~~
+from scheme import Universal
+
+scheme = Universal(gamma=3, fingerprint_bit_length=32)
+fingerprinted_data = scheme.insertion(data_path, secret_key=12345678, recipient_id=0)
+~~~
+A snippet of original data:
+|index|age|sex|bmi|children|smoker|region|charges|
+|---|---|---|---|---|---|---|---|
+|0|19|female|27\.9|0|yes|southwest|16884\.924|
+|1|18|male|33\.77|1|no|southeast|1725\.5523|
+|2|28|male|33\.0|3|no|southeast|4449\.462|
+|3|33|male|22\.705|0|no|northwest|21984\.47061|
+|4|32|male|28\.88|0|no|northwest|3866\.8552|
+A snippet of fingerprinted data:
+|index|age|sex|bmi|children|smoker|region|charges|
+|---|---|---|---|---|---|---|---|
+|0|19|female|27\.9|0|yes|southwest|16884\.925|
+|1|18|male|33\.77|1|no|southeast|1725\.5523|
+|2|28|male|33\.0|3|no|southeast|4449\.462|
+|3|33|male|22\.704|0|no|northwest|21984\.47061|
+|4|32|male|28\.88|0|no|southeast|3866\.8552|
+Two differences are evident: (3, bmi) and (4, region).
+Let's see the chnages overall:
 - show statistics of changes in the data, distributions
+Number of differences per attribute:
+||index|age|sex|bmi|children|smoker|region|charges|
+|---|---|---|---|---|---|---|---|---|
+|absolute|-|28|23|38|31|24|53|25|
+|percentage|2\.09%|1\.72%|2\.84%|2\.32%|1\.79%|3\.98%|1\.87%|
+
+How significant are the differences? Let's see the change in mean and standard deviation (we can do that only for numerical data)
+|original/fingerprinted|index|age|sex|bmi|children|smoker|region|charges|
+|---|---|---|---|---|---|---|---|---|---|
+|mean|-|39.207025/39.202541|-|30.663397/30.663472|1.094918/1.098655|-|-|13270.422265/13270.422264|
+|std|-|14.049960/14.054018|-|6.098187/6.098295|1.205493/1.213542|-|-|12110.011237/12110.011237
+For categorical data the changes are discreete so we can just have a look at the change of distributions:
+![](/assets/img/data-fingerprinting/distributions.pdf)
+I.e. minimal changes
+
 - show detection 
+~~~
+scheme.detection(fingerprinted_data, secret_key=12345678)
+~~~
+Output: Recipient with id: 0 is suspected.
+
+For the correctness, let's check the output with a wrong secret key:
+~~~
+scheme.detection(fingerprinted_data, secret_key=123)
+~~~
+Output: No one suspected.
+
+We can fingerprint more copies and see if there is possibility of a recipient confusion
+~~~
+more_fingerprinted_data_copies = []
+for i in range(1,20):
+  more_fingerprinted_data_copies.append(scheme.insertion(data_path, secret_key=12345678, recipient_id=i))
+  
+suspects = []
+suspects.append(scheme.detection(fingerprinted_data, secret_key=12345678))
+for fp_data in more_fingerprinted_data_copies:
+  suspects.append(scheme.detection(fp_data, secret_key=12345678))
+suspects
+~~~
+output: \[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19\]
+
 - show alteration example (subset/flipping) and successful detection 
+Let's see what happens if the recipient alters their data. 
+For example, deletes arbitrary entries (rows), deletes content of entire column and changes some values:
+~~~
+fp_data_modified = fingerprinted_data.dataframe.copy()
+# increase all bmi values by 0.111
+fp_data_modified['bmi'] = fp_data_copy['bmi'].apply(lambda x: x + 0.111)
+# replace all occurences of 18 with 19 and 50 with 51
+fp_data_modified.replace(18,19, inplace=True)
+fp_data_modified.replace(50,51, inplace=True)
+# remove 23 rows
+fp_data_modified.drop([1,5,89,120,145,167,567,600,675,723,765,876,901,902,903,910,999,1000,1004,1056,1099,1176,1234], axis=0, inplace=True)
+# remove the contents of entire column
+fp_data_modified['children'] = None
+
+scheme.detection(fp_data_modified, secret_key=12345678)
+~~~
+Out: Recipient 0 is suspected.
+(maybe include the counts)
+
 - show how much it is possible to change the data max, so that the fingerprint stays 
+But what is the limit with modifications? Let's see how much the data can be altered such that the fingerprint is still extractable. 
+We run this 10 times to average the randomness in removing arbitrary rows
