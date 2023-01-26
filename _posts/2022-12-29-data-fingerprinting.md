@@ -38,7 +38,6 @@ Intuitivelly, the more marks embedded in data, the more robust fingerprint will 
 - show how fingerprinting functions look like 
 ~~~
 from scheme import Universal
-
 scheme = Universal(gamma=3, fingerprint_bit_length=32)
 fingerprinted_data = scheme.insertion(data_path, secret_key=12345678, recipient_id=0)
 ~~~
