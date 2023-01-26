@@ -28,7 +28,7 @@ While this type of image watermarking is obvious and relativelly easy to remove[
 
 
 *insert image and source*
-## Fingerprinting vs. watermarking
+### Fingerprinting vs. watermarking
 Digital fingerprinting is an information hiding technique that helps protecting digital intellectual property.
 It encodes a secret owner-specific information and the identification of the content recipient such that it sis posssible to trace the source of unauthorised usage of a digital content and prove the ownership. 
 ## Fingerprinting tabular data, how does it work
