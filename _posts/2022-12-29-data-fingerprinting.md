@@ -7,10 +7,18 @@ gh-badge: [star, fork, follow]
 tags: [data]
 comments: true
 ---
+## IP protection
+Data is nowadays a crucial resource in many applications because processing it is beneficial in many businesses, governmental institutions and academia, and is of great value to its creators or owners because it usually requires a lot of time, effort, money and human experts to create, clean and prepare high-quality data.
+In some cases, the parties who have such valuable data, do not have enough processing power or expertise to maximise the utility of the data and hence need to share it with third parties. A great example are the hospitals with medical data that gets shared with researchers to obtain useful analyses. 
+Since data is valuable to its owner, it is in their interest to protect the ownership while being able to share the data with intended third parties, for example, by "signing" their data and being able to trace the copies to their recipients. 
+--- image: scenario - openly share the data with IP protection in place 
+
+![](/assets/img/data-fingerprinting/fingerprinting_scenario.png)
+
+The scenario at the same time describes the goals and abilities of an ownerhisp protection method called fingerprinting. 
+
 ## What is data fingerprinting
-Data fingerprinting is a method of embedding a traceable mark into digital data to verify the owner and identify the recipient of a released copy of a data set. 
-Fingerprinting is one of the steganography methods where information is represented or hiden within another digital or physical object, in such a manner that the presence of the information is not evident to human inspection. 
-Fingerprinting draws the motivation from a well known method of digital content protection, watermarking. 
+Data fingerprinting is a method of embedding a traceable mark into digital data to verify the owner and identify the recipient of a released copy of a data set. It falls under the area of steganography, methods where information is represented or hiden within another digital or physical object, in such a manner that the presence of the information is not evident to human inspection. Fingerprinting draws the motivation from a well-known method of digital content protection, watermarking. 
 *insert image and source*
 ## Fingerprinting vs. watermarking
 Digital fingerprinting is an information hiding technique that helps protecting digital intellectual property.
@@ -63,17 +71,20 @@ A snippet of fingerprinted data:
 Three differences are evident: (1,charges), (3, bmi) and (4, region).
 Let's see the chnages overall:
 - show statistics of changes in the data, distributions
+
+
 Number of differences per attribute:
-|-|index|age|sex|bmi|children|smoker|region|charges|
+
+| |index|age|sex|bmi|children|smoker|region|charges|
 |---|---|---|---|---|---|---|---|---|
 |absolute|-|28|23|38|31|24|53|25|
 |percentage|-|2\.09%|1\.72%|2\.84%|2\.32%|1\.79%|3\.98%|1\.87%|
 
 How significant are the differences? Let's see the change in mean and standard deviation (we can do that only for numerical data)
-|original/fingerprinted|index|age|sex|bmi|children|smoker|region|charges|
+| |index|age|sex|bmi|children|smoker|region|charges|
 |---|---|---|---|---|---|---|---|---|
-|mean|-|39.207025/39.202541|-|30.663397/30.663472|1.094918/1.098655|-|-|13270.422265/13270.422264|
-|std|-|14.049960/14.054018|-|6.098187/6.098295|1.205493/1.213542|-|-|12110.011237/12110.011237|
+|mean|-|39.2070/39.2025|-|30.6634/30.6635|1.0949/1.0987|-|-|13270.4223/13270.4223|
+|std|-|14.0500/14.0540|-|6.0982/6.0983|1.2055/1.2135|-|-|12110.0112/12110.0112|
 
 For categorical data the changes are discreete so we can just have a look at the change of distributions:
 ![](/assets/img/data-fingerprinting/distributions.pdf)
@@ -82,8 +93,15 @@ I.e. minimal changes
 - show detection 
 ~~~
 scheme.detection(fingerprinted_data, secret_key=12345678)
+~~~
 
-Out: Recipient with id: 0 is suspected.
+```
+scheme.detection(fingerprinted_data, secret_key=12345678)
+
+```
+
+~~~
+## Out: Recipient with id: 0 is suspected.
 ~~~
 
 For the correctness, let's check the output with a wrong secret key:
