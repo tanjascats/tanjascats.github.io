@@ -8,17 +8,25 @@ tags: [data]
 comments: true
 ---
 ## IP protection
-Data is nowadays a crucial resource in many applications because processing it is beneficial in many businesses, governmental institutions and academia, and is of great value to its creators or owners because it usually requires a lot of time, effort, money and human experts to create, clean and prepare high-quality data.
-In some cases, the parties who have such valuable data, do not have enough processing power or expertise to maximise the utility of the data and hence need to share it with third parties. A great example are the hospitals with medical data that gets shared with researchers to obtain useful analyses. 
+Data is nowadays a crucial resource in many applications because processing it is beneficial in many businesses, governmental institutions and academia. Furthermore, data is of great value to its creators or owners because it usually requires a lot of time, effort, money and human experts to create, clean and prepare high-quality data.
+In some cases, the parties who have such valuable data, do not have enough processing power or expertise to maximise the utility of the data and hence need to share it with third parties. A great example are the hospitals with medical data that needs to be shared with researchers to obtain useful analyses. 
 Since data is valuable to its owner, it is in their interest to protect the ownership while being able to share the data with intended third parties, for example, by "signing" their data and being able to trace the copies to their recipients. 
---- image: scenario - openly share the data with IP protection in place 
 
 ![](/assets/img/data-fingerprinting/fingerprinting_scenario.png)
 
-The scenario at the same time describes the goals and abilities of an ownerhisp protection method called fingerprinting. 
+This scenario at the same time describes the goals and the abilities of an ownerhisp protection method called fingerprinting. 
 
 ## What is data fingerprinting
-Data fingerprinting is a method of embedding a traceable mark into digital data to verify the owner and identify the recipient of a released copy of a data set. It falls under the area of steganography, methods where information is represented or hiden within another digital or physical object, in such a manner that the presence of the information is not evident to human inspection. Fingerprinting draws the motivation from a well-known method of digital content protection, watermarking. 
+Data fingerprinting is a method of embedding a traceable mark into digital data to verify the owner and identify the recipient of a released copy of a data set. It falls under the area of steganography, a group of methods where information is represented or hiden within another digital or physical object, in such a manner that the presence of the information is not evident to human inspection. Fingerprinting draws the motivation from a well-known method of digital content protection, watermarking. 
+
+![](/assets/img/data-fingerprinting/watermarkprotection.png)
+
+While this type of image watermarking is obvious and relativelly easy to remove[link], an important requirement for fingerprinting is to be imperceptible to human inspection. For images, this might mean changing a few pixels in a pattern known only to the content owner. In images and other types of multimedia (audio, video), it is easy to embed the imperceptible modifications due to large redundancy in content representation. Other types of digital content are more succeptible to intentional modifications and need more careful strategies of emebedding a mark. Historically, probably one of the first attamepts to protect ownership via such marks appeared in cartography. According to the article in Atlas Obscura[link], there are many examples of cartographers including "trap" streets, towns, rivers, and other elements into the maps - completely faulty information that helps detecting copyright violations. 
+
+![](/assets/img/data-fingerprinting/mapswatermark.png)
+
+
+
 *insert image and source*
 ## Fingerprinting vs. watermarking
 Digital fingerprinting is an information hiding technique that helps protecting digital intellectual property.
