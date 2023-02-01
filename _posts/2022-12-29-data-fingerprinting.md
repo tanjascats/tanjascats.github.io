@@ -17,22 +17,23 @@ Since data is valuable to its owner, it is in their interest to protect the owne
 This scenario at the same time describes the goals and the abilities of an ownerhisp protection method called fingerprinting. 
 
 ## What is data fingerprinting
-Data fingerprinting is a method of embedding a traceable mark into digital data to verify the owner and identify the recipient of a released copy of a data set. It falls under the area of steganography, a group of methods where information is represented or hiden within another digital or physical object, in such a manner that the presence of the information is not evident to human inspection. Fingerprinting draws the motivation from a well-known method of digital content protection, watermarking. 
+Data fingerprinting is a method of embedding a traceable mark into digital data to verify the owner and identify the recipient of a released copy of a data set. It falls under the area of _steganography_, a group of methods where information is represented or hiden within another digital or physical object, in such a manner that the presence of the information is not evident to human inspection. Fingerprinting draws the motivation from a well-known method of digital content protection, _watermarking_. 
 
 ![](/assets/img/data-fingerprinting/watermarkprotection.png)
 
-While this type of image watermarking is obvious and relativelly easy to remove[link], an important requirement for fingerprinting is to be imperceptible to human inspection. For images, this might mean changing a few pixels in a pattern known only to the content owner. In images and other types of multimedia (audio, video), it is easy to embed the imperceptible modifications due to large redundancy in content representation. Other types of digital content are more succeptible to intentional modifications and need more careful strategies of emebedding a mark. Historically, probably one of the first attamepts to protect ownership via such marks appeared in cartography. According to the article in Atlas Obscura[link], there are many examples of cartographers including "trap" streets, towns, rivers, and other elements into the maps - completely faulty information that helps detecting copyright violations. 
+While this type of image watermarking is obvious and [relatively easy to remove](https://www.dpreview.com/news/6322652598/shutterstock-s-new-watermarking-system-foils-google-s-ai), an important requirement for fingerprinting is to be imperceptible to human inspection. For images, this might mean changing a few pixels in a pattern known only to the content owner. In images and other types of multimedia (audio, video), it is easy to embed the imperceptible modifications due to large redundancy in content representation. Other types of digital content are more succeptible to intentional modifications and need more careful strategies of emebedding a mark. Historically, probably one of the first attamepts to protect ownership via such marks appeared in cartography. According to the article in Atlas Obscura[link], there are many examples of cartographers including "trap" streets, towns, rivers, and other elements into the maps - completely faulty information that helps detecting copyright violations. 
 
 ![](/assets/img/data-fingerprinting/mapswatermark.png)
 
+Since then, watermarking has been applied in many other areas of digital content, such as multimedia (text, audio, video), text, software, tabular data, sequential data and machine learning models. 
 
 
-*insert image and source*
 ### Fingerprinting vs. watermarking
-Digital fingerprinting is an information hiding technique that helps protecting digital intellectual property.
-It encodes a secret owner-specific information and the identification of the content recipient such that it sis posssible to trace the source of unauthorised usage of a digital content and prove the ownership. 
+Digital _fingerprinting_ is a special type of watermarking that, besides ownership verification, provides tracing of unauthorised content usage. 
+The fingerprint encodes a secret owner-specific information for the ownership verification and the identification of the content recipient for tracing. This means that every distributed copy of the content will be slightly different and unique.
+
 ## Fingerprinting tabular data, how does it work
-Fingerprint is a bit string unique for each data recipient, that gets embedded into data via _embedding algorithim_. Fingerprint is created by some hash function that takes as an input the owner's secret key combined (e.g. concatenated) with the ID of a recipient. The embedding algorithm then applies minor pseudo-random modifications on data based on the given fingerprint.
+Fingerprint is a bit string unique for each data recipient, that gets embedded into data via _embedding algorithim_. Fingerprint is created by a hash function that takes as an input the owner's secret key combined (e.g. concatenated) with the ID of a recipient. The embedding algorithm then applies minor pseudo-random modifications on data based on the given fingerprint.
 The positions of modifications are firstly chosen by a pseudo-random number sequence generator seeded by the owner's secret key. 
 Secondly, each fingerprint bit contributes to some of the modifications. 
 For instance, the fingerprint bit at the position 0 will cause the value 1 to change to 0 (red square).
@@ -51,13 +52,9 @@ Therefore, each fingerprint bit is embedded with enough redundancy into the data
 Intuitivelly, the more marks embedded in data, the more robust fingerprint will be. However, since more marks means modifying the original data more, this necessarily implies some utility loss. Therefore, a challenge for fingerprinting techniques is to **provide a robust ownership protection mechanism while keeping the original data utility as well as possible**.
 
 ## Fingerprinting a toy data set
-- show how fingerprinting functions look like 
-~~~
-from scheme import Universal
-scheme = Universal(gamma=3, fingerprint_bit_length=32)
-fingerprinted_data = scheme.insertion(data_path, secret_key=12345678, recipient_id=0)
-~~~
+We will show the fingerprinting process and the effects it has on data using our fingerprinting toolbox and insurance dataset.
 A snippet of original data:
+
 |index|age|sex|bmi|children|smoker|region|charges|
 |---|---|---|---|---|---|---|---|
 |0|19|female|27\.9|0|yes|southwest|16884\.924|
@@ -66,7 +63,7 @@ A snippet of original data:
 |3|33|male|22\.705|0|no|northwest|21984\.47061|
 |4|32|male|28\.88|0|no|northwest|3866\.8552|
 
-A snippet of fingerprinted data:
+After embedding a fingerprint, the same snippet looks like this:
 
 |index|age|sex|bmi|children|smoker|region|charges|
 |---|---|---|---|---|---|---|---|
@@ -77,26 +74,24 @@ A snippet of fingerprinted data:
 |4|32|male|28\.88|0|no|southeast|3866\.8552|
 
 Three differences are evident: (1,charges), (3, bmi) and (4, region).
-Let's see the chnages overall:
-- show statistics of changes in the data, distributions
-
-
-Number of differences per attribute:
+Let's see the changes overall. The following table shows the amount of differences per attribute:
 
 | |index|age|sex|bmi|children|smoker|region|charges|
 |---|---|---|---|---|---|---|---|---|
 |absolute|-|28|23|38|31|24|53|25|
 |percentage|-|2\.09%|1\.72%|2\.84%|2\.32%|1\.79%|3\.98%|1\.87%|
 
-How significant are the differences? Let's see the change in mean and standard deviation (we can do that only for numerical data)
+The percentage of modified values per attribute is rather low. But how significant are the differences? Let's see the change in mean and standard deviation (we can do that only for numerical data):
+
 | |index|age|sex|bmi|children|smoker|region|charges|
 |---|---|---|---|---|---|---|---|---|
 |mean|-|39.2070/39.2025|-|30.6634/30.6635|1.0949/1.0987|-|-|13270.4223/13270.4223|
 |std|-|14.0500/14.0540|-|6.0982/6.0983|1.2055/1.2135|-|-|12110.0112/12110.0112|
 
-For categorical data the changes are discreete so we can just have a look at the change of distributions:
+We can see that mean and standard deviation are very similar between the original and fingerprinted data. This is because the fingerprint only introduces minor changes into the values by changing one or more least significant bits of the numerical value. For categorical data the changes are discreete so we can just have a look at the change of distributions and observe minimal changes, as well:
+
 ![](/assets/img/data-fingerprinting/distributions.pdf)
-I.e. minimal changes
+
 
 - show detection 
 ~~~
