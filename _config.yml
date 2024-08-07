@@ -10,7 +10,7 @@
 ############################
 
 # Name of website
-title: Tanja Šarčević, MSc
+title: Tanja Šarčević
 
 # Your name to show in the footer
 author: Tanja Šarčević
@@ -20,12 +20,13 @@ author: Tanja Šarčević
 ###############################################
 
 navbar-links:
-  About Me: "aboutme"
-  Blog: "blog"
-  Resources:
+#  About Me: "aboutme"
+#  Blog: "blog"
+#  Resources:
 #    - Beautiful Jekyll: "https://beautifuljekyll.com"
 #    - Learn markdown: "https://www.markdowntutorial.com/"
-  Author's home: "tanjasarcevic.github.io"
+#  Author's home: "tanjasarcevic.github.io"
+  Publications: "publications"
 
 ################
 # --- Logo --- #
@@ -33,7 +34,7 @@ navbar-links:
 
 # Image to show in the navigation bar - works best with a square image
 # Remove this parameter if you don't want an image in the navbar
-avatar: "/assets/img/avatar-icon.png"
+avatar: "/assets/img/profile.jfif"
 
 # By default, the image is cut into a circle. You can disable this behaviour by setting 'round-avatar: false'
 round-avatar: true
@@ -73,7 +74,7 @@ social-network-links:
 #  calendly: yourname
 #  mastodon: instance.url/@username
   ORCID: 0000-0003-0896-9193
-#  google-scholar: your google scholar
+  google-scholar: https://scholar.google.at/citations?user=WGrxnKIAAAAJ&hl=en
 #  discord: invite/invite_code or users/userid 
 #  kaggle: yourname
 #  hackerrank: yourname
@@ -118,7 +119,7 @@ edit_page_button: true
 navbar-var-length: false
 
 # The keywords to associate with your website, for SEO purposes
-keywords: "privacy,machine learning,ml,security"
+keywords: "privacy,machine learning,ml,security,ai,artificial intelligence"
 
 ######################################
 # --- Colours / background image --- #
