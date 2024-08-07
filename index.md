@@ -12,7 +12,7 @@ I have been tutoring and teaching at TU Wien and FH Technikum in courses _Machin
 
 [Curriculum Vitae](./assets/doc/ACADEMIC_CV_Tanja_Sarcevic.pdf) (last update: August 7, 2024)
 
-**I am passionate about Machine Learning and, in particular, how to make it secure, safe and privacy-aware. ** 
+__I am passionate about Machine Learning and, in particular, how to make it secure, safe and privacy-aware.__
 
 ### Publications
 All publications are listed on my [Google Scholar account](https://scholar.google.com/citations?user=WGrxnKIAAAAJ&hl=en&oi=ao). The following list is last updated on August 7, 2024:
