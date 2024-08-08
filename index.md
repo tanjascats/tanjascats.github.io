@@ -36,6 +36,10 @@ Semantic Web, pp.1-34.
   Šarčević, T. and Mayer, R., 2020, September.\
   In IFIP International Conference on ICT Systems Security and Privacy Protection (pp. 401-415). Springer, Cham.\
     [[code](https://github.com/tanjascats/nn-fingerprinting-scheme)]
-- [An Evaluation on Robustness and Utility of Fingerprinting Schemes.](https://link.springer.com/chapter/10.1007/978-3-030-29726-8_14)\ Šarčević, T. and Mayer, R., 2019, August.\ In International Cross-Domain Conference for Machine Learning and Knowledge Extraction (pp. 209-228). Springer, Cham.
-- [Artificial Bee Colony Algorithm for Solving the Flight Disruption Problem.](https://link.springer.com/chapter/10.1007/978-3-319-94779-2_7)\ Šarčević, T., Rocha, A.P. and Castro, A.J., 2018, June.\ In International Conference on Practical Applications of Agents and Multi-Agent Systems (pp. 72-81). Springer, Cham.
+- [An Evaluation on Robustness and Utility of Fingerprinting Schemes.](https://link.springer.com/chapter/10.1007/978-3-030-29726-8_14)\
+  Šarčević, T. and Mayer, R., 2019, August.\
+  In International Cross-Domain Conference for Machine Learning and Knowledge Extraction (pp. 209-228). Springer, Cham.
+- [Artificial Bee Colony Algorithm for Solving the Flight Disruption Problem.](https://link.springer.com/chapter/10.1007/978-3-319-94779-2_7)\
+  Šarčević, T., Rocha, A.P. and Castro, A.J., 2018, June.\
+  In International Conference on Practical Applications of Agents and Multi-Agent Systems (pp. 72-81). Springer, Cham.
 
