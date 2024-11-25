@@ -10,7 +10,7 @@ Currently, I am a researcher in [SBA Research](https://www.sba-research.org/) in
 I previously completed master studies [Logic and Computation](https://informatics.tuwien.ac.at/master/logic-and-computation/) at TU Wien, and the bachelor program in [Computer Science](https://www.fer.unizg.hr/studiji/fer3/racunarstvo) at the Faculty of Electrical Engineering and Computing at Zagreb University.
 I have been tutoring and teaching at TU Wien and [FH Technikum](https://www.technikum-wien.at/) in courses _Machine Learning_ and _Security and Privacy in Machine Learning_.
 
-[Curriculum Vitae](./assets/doc/ACADEMIC_CV_Tanja_Sarcevic.pdf) (last update: August 7, 2024)
+[Curriculum Vitae](./assets/doc/TANJA_SARCEVIC_CV.pdf) (last update: August 7, 2024)
 
 ✨ __I am passionate about Machine Learning and, in particular, how to make it secure, safe and privacy-aware.__ ✨
 
